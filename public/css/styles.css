@@ -1,6 +1,280 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
+
+@font-face {
+  font-family: 'source';
+  src: url('../fonts/source.ttf');
+}
+
+@font-face {
+  font-family: 'exo';
+  src: url('../fonts/exo.ttf');
+}
+
+:root{
+  --color-primary: white;
+  --color-secondary: #242332;
+  --color-tertiary: #4c96d7;
+  --color-bg: rgb(226, 233, 241);
+  --color-text: black;
+  --font-title: source;
+  --font-text: exo;
+}
+
+* {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
+  font-family: var(--font-title);
+}
+
+header {
+  width: 100vw;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.welcome-site {
+  font-size: 38px;
+}
+
+.siteName a {
+  text-decoration: none;
+  font-size: 38px;
+  color: var(--color-secondary);
+}
+
+#tools a {
+  text-decoration: none;
+  font-size: 23px;
+  color: var(--color-secondary);
+}
+
+title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+
+nav {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  background-color: var(--color-secondary);
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  color: var(--color-primary);
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--color-primary);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.delorean-main {
+  text-align: center;
+}
+.delorean-img {
+  width: 630px;
+  display: block;
+  margin: 0 auto;
+}
+
+.floating-box {
+  position: absolute;
+  top: 40%;
+  left: 33%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(255, 255, 255, 0.8);
+  padding: 20px;
+  text-align: center;
+}
+
+.delorean-description ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+}
+
+.delorean-description li {
+  font-weight: bold;
+  font-size: 22px;
+  color: var(--color-tertiary);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.today{
+  width: 100%;
+  max-width: 200px;
+  margin-top: 20px;
+}
+
+section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.half-section-l {
+  width: 25%; 
+}
+
+.half-section-r {
+  width: 30%; 
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 10px;
+  row-gap: 60px
+}
+
+
+.description {
+  color: var(--color-text);
+  text-align: center;
+  position: absolute;
+  bottom: -35px; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%; 
+  z-index: 2; 
+}
+
+
+.grid-item {
+  font-size: 18px;
+  text-align: center;
+  position: relative;
+  height: 80px;
+  background-color: var(--color-tertiary);
+}
+
+
+.list-container {
+  margin-top: 20px;
+}
+
+.delorean-upgrades {
+  text-align: left;
+  font-size: 28px;
+}
+
+.delorean-review {
+  text-align: left;
+  font-size: 28px;
+}
+
+ul.list-elements {
+  font-family: var(--font-text);
+  text-align: left;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+footer {
+  font-family: var(--font-text);
+  font-size: 18px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+
+/* Estilos para pantalla pequeña */
+@media screen and (max-width: 767px) {
+  header {
+    height: 80px;
+  }
+
+  .welcome-site {
+    font-size: 32px;
+  }
+
+  nav {
+    height: 70px;
+  }
+
+  nav ul {
+    width: 70%;
+  }
+
+  nav ul li a {
+    font-size: 16px;
+  }
+
+  .delorean-main {
+    text-align: center;
+    padding: 10px;
+  }
+
+  .delorean-img {
+    max-width: 100%;
+  }
+
+  .floating-box {   
+    top: 35%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+  }
+
+  .today{
+    width: 100%;
+    max-width: 120px;
+    margin-top: 10px;
+  }
+
+  section {
+    flex-direction: column;
+  }
+
+  .half-section-l {
+    width: 100%; 
+  }
+
+  .half-section-r {
+    margin-top: 50px;
+    width: 100%;
+  }
+
+  .grid-container {
+    gap: 10px;
+    row-gap: 40px;
+  }
+
+  .delorean-upgrades, .delorean-review {
+    font-size: 24px;
+  }
+
+  ul.list-elements {
+    font-size: 18px;
+  }
+
+  .delorean-description li {
+    font-size: 15px;
+    color: var(--color-tertiary);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  
 }

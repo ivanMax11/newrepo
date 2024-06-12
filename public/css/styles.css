@@ -35,6 +35,7 @@ header {
 }
 
 .welcome-site {
+  margin-top: 20px;
   font-size: 38px;
 }
 
@@ -59,7 +60,7 @@ title {
 
 
 nav {
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,6 +84,24 @@ nav ul li a {
   font-weight: 700;
 }
 
+body {
+  background-image: url('../images/site/small_check.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px 0;
+
+}
+
+#wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgb(0, 0, 0, 0.1);
+  border: 10px solid #4c96d7;
+}
+
 .delorean-main {
   text-align: center;
 }
@@ -94,8 +113,8 @@ nav ul li a {
 
 .floating-box {
   position: absolute;
-  top: 40%;
-  left: 33%;
+  top: 45%;
+  left: 34%;
   transform: translate(-50%, -50%);
   background-color: rgb(255, 255, 255, 0.8);
   padding: 20px;
@@ -123,16 +142,17 @@ nav ul li a {
 }
 
 section {
+  
   display: flex;
   justify-content: space-between;
 }
 
 .half-section-l {
-  width: 25%; 
+  width: 45%; 
 }
 
 .half-section-r {
-  width: 30%; 
+  width: 45%; 
 }
 
 .grid-container {
@@ -169,11 +189,13 @@ section {
 }
 
 .delorean-upgrades {
+  margin-bottom: 40px;
   text-align: left;
   font-size: 28px;
 }
 
 .delorean-review {
+  margin-bottom: 40px;
   text-align: left;
   font-size: 28px;
 }
@@ -232,8 +254,8 @@ footer {
   }
 
   .floating-box {   
-    top: 35%;
-    left: 15%;
+    top: 38%;
+    left: 17%;
     transform: translate(-50%, -50%);
   }
 

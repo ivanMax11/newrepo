@@ -27,7 +27,7 @@
 }
 
 header {
-  width: 100vw;
+  width: 100%;
   height: 100px;
   display: flex;
   justify-content: space-between;
@@ -49,6 +49,7 @@ header {
   text-decoration: none;
   font-size: 23px;
   color: var(--color-secondary);
+  
 }
 
 title {
@@ -88,7 +89,7 @@ body {
   background-image: url('../images/site/small_check.png');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   padding: 20px 0;
 
 }
@@ -142,17 +143,19 @@ body {
 }
 
 section {
-  
+  flex-wrap: wrap;
   display: flex;
   justify-content: space-between;
 }
 
 .half-section-l {
   width: 45%; 
+  box-sizing: border-box;
 }
 
 .half-section-r {
   width: 45%; 
+  box-sizing: border-box;
 }
 
 .grid-container {
@@ -167,7 +170,7 @@ section {
   color: var(--color-text);
   text-align: center;
   position: absolute;
-  bottom: -35px; 
+  bottom: -25px; 
   left: 50%;
   transform: translateX(-50%);
   width: 80%; 
@@ -219,6 +222,15 @@ footer {
   display: flex;
   justify-content: left;
   align-items: center;
+}
+
+
+/* Estilos para vista mediana (705px a 940px) */
+@media screen and (min-width: 708px) and (max-width: 1000px) {
+  .description {
+    bottom: -20px; /* Ajusta el valor según sea necesario */
+    font-size: small;
+  }
 }
 
 

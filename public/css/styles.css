@@ -225,19 +225,32 @@ footer {
 /* Estilos para pantalla pequeña */
 @media screen and (max-width: 767px) {
   header {
+    width: 90vw;
     height: 80px;
   }
 
+  #top-header {
+    height: 110px;
+  }
+
+  #tools a{
+    font-size: 15px;
+  }
+
+  .siteName a{
+    font-size: 40px;
+  }
+
   .welcome-site {
-    font-size: 32px;
+    font-size: 30px;
   }
 
   nav {
-    height: 70px;
+    height: 55px;
   }
 
   nav ul {
-    width: 70%;
+    width: 100%;
   }
 
   nav ul li a {
@@ -254,8 +267,9 @@ footer {
   }
 
   .floating-box {   
-    top: 38%;
-    left: 17%;
+    
+    top: 43%;
+    left: 22%;
     transform: translate(-50%, -50%);
   }
 
@@ -283,7 +297,11 @@ footer {
     row-gap: 40px;
   }
 
+  .description {
+    bottom: -42px;
+  }
   .delorean-upgrades, .delorean-review {
+    margin-top: 30px;
     font-size: 24px;
   }
 

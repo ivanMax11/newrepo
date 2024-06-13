@@ -268,7 +268,7 @@ footer {
 
   .floating-box {   
     
-    top: 38%;
+    top: 41%;
     left: 23%;
     transform: translate(-50%, -50%);
   }
@@ -298,10 +298,11 @@ footer {
   }
 
   .description {
-    bottom: -42px;
+    bottom: -15px;
+    font-size: small;
   }
   .delorean-upgrades, .delorean-review {
-    margin-top: 30px;
+    margin-top: 50px;
     font-size: 24px;
   }
 

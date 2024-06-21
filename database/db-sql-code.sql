@@ -1,4 +1,4 @@
-db-sql-code.sql
+
 
 -- Type: account_type
 

@@ -215,6 +215,54 @@ li {
   margin-bottom: 10px;
 }
 
+/* Styles to vehicles list */
+/* Styles to content ul */
+#inv-display {
+  list-style-type: none; 
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+}
+
+/* Styles to elements li */
+#inv-display li {
+  background: var(--color-bg); 
+  border: 1px solid #ddd; 
+  border-radius: 5px; 
+  margin: 15px; 
+  padding: 15px;
+  width: calc(33.333% - 30px); 
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styles to the imáges */
+#inv-display li img {
+  max-width: 100%; 
+  height: auto; 
+  border-radius: 5px;
+}
+
+/* Styles to titles */
+#inv-display li h3 {
+  margin: 10px 0;
+  font-size: 1.5em;
+  color: #333;
+  text-align: center; 
+}
+
+/* Styles to prices */
+#inv-display li p {
+  margin: 5px 0;
+  font-size: 1.2em;
+  color: #666;
+  text-align: center; 
+}
+
+
 footer {
   font-family: var(--font-text);
   font-size: 18px;
@@ -225,10 +273,10 @@ footer {
 }
 
 
-/* Estilos para vista mediana (705px a 940px) */
+/* Styles to medium screen (705px a 940px) */
 @media screen and (min-width: 708px) and (max-width: 1000px) {
   .description {
-    bottom: -20px; /* Ajusta el valor según sea necesario */
+    bottom: -20px;
     font-size: small;
   }
 
@@ -238,7 +286,7 @@ footer {
 }
 
 
-/* Estilos para pantalla pequeña */
+/* Styles to small screen */
 @media screen and (max-width: 767px) {
   header {
     width: 90vw;

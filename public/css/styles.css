@@ -385,4 +385,17 @@ footer {
     font-size: small;
   }
   
+  /* Styles to elements li */
+  #inv-display li {
+    background: var(--color-bg); 
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    margin: 15px; 
+    padding: 15px;
+    width: calc(42% - 30px); 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

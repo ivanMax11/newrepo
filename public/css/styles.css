@@ -381,5 +381,8 @@ footer {
     display: block;
   }
 
+  .namePrice h2 {
+    font-size: small;
+  }
   
 }

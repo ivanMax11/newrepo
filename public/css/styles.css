@@ -272,6 +272,44 @@ footer {
   align-items: center;
 }
 
+/* styles in details view */
+.vehicle-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--color-bg);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.vehicle-detail h1 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.vehicle-detail img {
+  float: left;
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+
+.vehicle-detail h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.vehicle-detail p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+
 
 /* Styles to medium screen (705px a 940px) */
 @media screen and (min-width: 708px) and (max-width: 1000px) {

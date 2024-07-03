@@ -1,29 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head') %>
+    <%- include("../partials/head") %>
  
-  <body>
-    <div id="wrapper">
-      <%- include('../partials/header') %> 
-      <%- include('../partials/navigation') %>
-      <h1 class="welcome-site">Welcome to CSE Motors</h1>
-      <main class="delorean-main">
-        <div class="floating-box">
-          <div class="delorean-description">
-            <ul>
-              <li>DMC Delorean</li>
-              <li>3 Cups holders</li>
-              <li>Superman Doors</li>
-              <li>Fuzzy Dicel</li>
-            </ul>
-          </div>
-          <img class="today" src="/images/site/own_today.png" alt="">
+    <body>
+        <div id="wrapper">
+            <%- include("../partials/header") %>
+            <%- include("../partials/navigation") %>
+ 
+            <main>
+                <%- body %>
+            </main>
+ 
+            <%- include("../partials/footer") %>
         </div>
-        <img class="delorean-img" src="/images/vehicles/delorean.jpg" alt="">
-        <%- body %>
-      </main>
-
-      <%- include('../partials/footer') %>
-    </div>
-  </body>
+    </body>
 </html>

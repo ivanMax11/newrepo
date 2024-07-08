@@ -103,6 +103,11 @@ body {
   border: 10px solid #4c96d7;
 }
 
+#messages {
+  color: red;
+  font-weight: 700;
+}
+
 .delorean-main {
   text-align: center;
 }
@@ -114,7 +119,7 @@ body {
 
 .floating-box {
   position: absolute;
-  top: 45%;
+  top: 48%;
   left: 34%;
   transform: translate(-50%, -50%);
   background-color: rgb(255, 255, 255, 0.8);
@@ -309,6 +314,106 @@ footer {
   margin-bottom: 10px;
 }
 
+/* Stles to the views Login and Register */
+body {
+
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 50px); /* Altura del viewport menos la altura del nav */
+  padding-top: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+form {
+  background-color: var(--color-bg);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 100%;
+  margin: auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input[type="firstName"],
+input[type="LastName"],
+input[type="email"],
+input[type="password"] {
+  width: calc(100% - 22px); /* Ajuste para el borde */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  width: 30%; 
+  padding: 10px;
+  background-color: #28863d;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+a {
+  color: #0068d6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p.error-message {
+  color: red;
+  text-align: center;
+}
+
+input[type="checkbox"] {
+  margin-top: 1em;
+}
+
+input[type="password"] {
+  width: calc(100% - 32px); /* Ajuste para el botón "Show Password" */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all 0.3s ease; /* Transición suave para cambios */
+}
+
+input[type="password"].show-password {
+  font-family: 'Courier New', Courier, monospace;
+}
 
 
 /* Styles to medium screen (705px a 940px) */

@@ -93,6 +93,15 @@ Util.buildVehicleDetailView = function (vehicle) {
   return detail;
 };
 
+/* ****************************************
+*  Deliver login view
+* *************************************** */
+async function buildLogin(req, res, next) {   // This function will be implemented later to render the login view
+  res.render("account/login", {  
+    title: "Login",
+  });
+}
+
 
 /* ****************************************
  * Middleware For Handling Errors

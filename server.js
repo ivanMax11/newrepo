@@ -1,11 +1,7 @@
-/* ******************************************
- * This server.js file is the primary file of the 
- * application. It is used to control the project.
- *******************************************/
 /* ***********************
  * Require Statements
  *************************/
-const baseController = require("./controllers/baseController")
+const baseController = require("./controllers/baseController");
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config();
@@ -13,11 +9,11 @@ const app = express();
 const staticRoutes = require("./routes/static"); // Correct import
 const inventoryRoute = require("./routes/inventoryRoute"); 
 const utilities = require('./utilities'); // Require the utilities file
-const session = require("express-session")
-const flash = require('connect-flash')
-const pool = require('./database')
+const session = require("express-session");
+const flash = require('connect-flash');
+const pool = require('./database');
 const accountRouter = require('./routes/accountRoute');
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 
 
 /* ********************************
@@ -32,9 +28,6 @@ app.set("layout", "./layouts/layout"); // not at views root
  *************************/
 app.use(express.static("public")); // Servir archivos estáticos desde la carpeta "public"
 
-/* ***********************
- * Middleware
- * ************************/
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
@@ -44,10 +37,10 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   name: 'sessionId',
-}))
+}));
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true })) // For parsing application/x-www-form-urlencoded
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
 
 // Express Messages Middleware
 app.use(require('connect-flash')())
@@ -56,44 +49,45 @@ app.use(function(req, res, next) {
   next()
 })
 
-
 /* ***********************
  * Routes
  *************************/
 app.use("/static", staticRoutes); // Usar el módulo de rutas estáticas correctamente
 
 // Index route
-app.get("/", utilities.handleErrors(baseController.buildHome))
+app.get("/", utilities.handleErrors(baseController.buildHome));
 
 // Inventory routes
-app.use("/inv", inventoryRoute)
+app.use("/inv", inventoryRoute);
 
 // MyAccount Routes
-app.use("/account", accountRouter) // Mount the account router under '/account' prefix
+app.use("/account", accountRouter); // Mount the account router under '/account' prefix
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
-  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
-})
+  next({status: 404, message: 'Sorry, we appear to have lost that page.'});
+});
 
 /* **********************************
 * Express Error Handler
 * Place after all other middleware
 ************************************/
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  let nav = await utilities.getNav();
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+  let message;
   if(err.status == 404) { 
-    message = err.message
+    message = err.message;
   } else {
-    message = 'Oh no! There was a crash. Maybe try a different route?'
+    message = 'Oh no! There was a crash. Maybe try a different route?';
   }
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
     nav
-  })
-})
+  });
+});
+
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file

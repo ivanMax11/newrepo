@@ -3,25 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
     <link rel="stylesheet" href="/public/css/styles.css">
+    <style>
+        /* Puedes agregar estilos específicos aquí si es necesario */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        span.password-requirements {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <h1><%= title %></h1>
     <% if (messages.error) { %>
-        <p style="color: red"><%= messages.error %></p>
+        <p style="color: red"><%- messages.error %></p>
     <% } %>
-    <% if (messages.notice) { %>
-        <p style="color: green"><%= messages.notice %></p>
+    <% if (messages.success) { %>
+        <p style="color: green"><%- messages.notice %></p>
     <% } %>
     <form action="/account/login" method="POST">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required placeholder="Enter a valid email address">
+        
         <label for="password">Password:</label>
-        <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
+        <span class="password-requirements">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
         <input type="password" id="password" name="password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-        <input type="checkbox" id="showPassword">
-        <label for="showPassword">Show Password</label>
+        
+        <label for="showPassword" style="display: flex; align-items: center;">
+            <input type="checkbox" id="showPassword">
+            Show Password
+        </label>
+        
         <button type="submit">Login</button>
     </form>
     <p>Don't have an account? <a href="/account/register">Register Here</a></p>

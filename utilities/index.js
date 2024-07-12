@@ -1,27 +1,40 @@
 const invModel = require("../models/inventory-model");
+
 const Util = {};
 
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
 Util.getNav = async function () {
-  let data = await invModel.getClassifications();
-  let list = "<ul>";
-  list += '<li><a href="/" title="Home page">Home</a></li>';
-  data.rows.forEach((row) => {
-    list += "<li>";
-    list +=
-      '<a href="/inv/type/' +
-      row.classification_id +
-      '" title="See our inventory of ' +
-      row.classification_name +
-      ' vehicles">' +
-      row.classification_name +
-      "</a>";
-    list += "</li>";
-  });
-  list += "</ul>";
-  return list;
+  try {
+    // Obtener las clasificaciones desde el modelo
+    let data = await invModel.getClassifications();
+    
+    // Inicializar la lista de navegación
+    let list = "<ul>";
+    list += '<li><a href="/" title="Home page">Home</a></li>';
+
+    // Verificar si hay datos válidos para construir la lista de navegación
+    if (data && data.length > 0) {  // Modificado: data ahora es un array directamente
+      data.forEach((row) => {
+        list += "<li>";
+        list +=
+          `<a href="/inv/type/${row.classification_id}" title="See our inventory of ${row.classification_name} vehicles">` +
+          `${row.classification_name}</a>`;
+        list += "</li>";
+      });
+    } else {
+      // Manejar el caso donde no hay clasificaciones encontradas
+      list += '<li><a href="#" title="No classifications found">No Classifications Found</a></li>';
+    }
+
+    list += "</ul>";
+    return list;
+  } catch (error) {
+    // Manejar errores al obtener las clasificaciones
+    console.error("Error in getNav:", error);
+    return '<ul><li><a href="#" title="Error loading classifications">Error Loading Classifications</a></li></ul>';
+  }
 };
 
 /* **************************************
@@ -34,45 +47,19 @@ Util.buildClassificationGrid = async function (data) {
     data.forEach((vehicle) => {
       grid += "<li>";
       grid +=
-        '<a href="../../inv/detail/' +
-        vehicle.inv_id +
-        '" title="View ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        ' details"><img src="' +
-        vehicle.inv_thumbnail +
-        '" alt="Image of ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        ' on CSE Motors" /></a>';
+        `<a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">` +
+        `<img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors" /></a>`;
       grid += '<div class="namePrice">';
       grid += "<hr />";
-      grid += "<h2>";
       grid +=
-        '<a href="../../inv/detail/' +
-        vehicle.inv_id +
-        '" title="View ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        ' details">' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        "</a>";
-      grid += "</h2>";
-      grid +=
-        "<span>$" +
-        new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
-        "</span>";
+        `<h2><a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">` +
+        `${vehicle.inv_make} ${vehicle.inv_model}</a></h2>`;
       grid += "</div>";
       grid += "</li>";
     });
     grid += "</ul>";
   } else {
-    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+    grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>';
   }
   return grid;
 };
@@ -80,7 +67,6 @@ Util.buildClassificationGrid = async function (data) {
 /* **************************************
  * Build the vehicle detail view HTML
  ************************************** */
-// index.js de utilities
 Util.buildVehicleDetailView = function (vehicle) {
   let detail = '<div class="vehicle-detail">';
   detail += `<h1>${vehicle.inv_make} ${vehicle.inv_model}</h1>`;
@@ -93,15 +79,24 @@ Util.buildVehicleDetailView = function (vehicle) {
   return detail;
 };
 
-/* ****************************************
-*  Deliver login view
-* *************************************** */
-async function buildLogin(req, res, next) {   // This function will be implemented later to render the login view
-  res.render("account/login", {  
-    title: "Login",
-  });
-}
-
+/* **************************************
+ * Build the classification list HTML for the add inventory view
+ ************************************** */
+Util.buildClassificationList = async function () {
+  try {
+    let data = await invModel.getClassifications();
+    let options = "";
+    if (data && data.length > 0) {
+      data.forEach((row) => {
+        options += `<option value="${row.classification_id}">${row.classification_name}</option>`;
+      });
+    }
+    return options;
+  } catch (error) {
+    console.error("Error building classification list:", error);
+    throw error;
+  }
+};
 
 /* ****************************************
  * Middleware For Handling Errors

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1><%- title %></h1>
+    <!-- Mostrar mensajes -->
+    <% if (messages) { %>
+        <div>
+            <% Object.keys(messages).forEach(function (type) { %>
+                <div class="alert alert-<%= type %>"><%= messages[type] %></div>
+            <% }) %>
+        </div>
+    <% } %>
+    <% if (errors && errors.length > 0) { %>
+        <div class="errors">
+            <% errors.forEach(function (error) { %>
+                <p class="error"><%= error.msg %></p>
+            <% }) %>
+        </div>
+    <% } %>
+
+    <form class="classification-form" action="/inv/add-classification" method="post" onsubmit="return validateForm()">
+        <label for="classification_name">Classification Name:</label>
+        <input type="text" id="classification_name" name="classification_name" required class="classification-input">
+        <p>The classification name cannot contain a space or special character of any kind.</p>
+        <button type="submit" class="classification-button">Add Classification</button>
+    </form>
+
+    <script>
+        // Client-side validation script
+        function validateForm() {
+            const classificationName = document.getElementById('classification_name').value;
+            const regex = /^[a-zA-Z0-9]+$/;
+            if (!regex.test(classificationName)) {
+                alert("The classification name cannot contain spaces or special characters.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

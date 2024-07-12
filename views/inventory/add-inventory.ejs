@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1><%= title %></h1>
+  <main>   
+    <% if (messages && messages.error && messages.error.length > 0) { %>
+      <div class="error">
+        <% messages.error.forEach(function(msg) { %>
+          <p><%- msg %></p>
+        <% }); %>
+      </div>
+    <% } %>
+
+    <% if (messages && messages.success && messages.success.length > 0) { %>
+      <div class="success">
+        <% messages.success.forEach(function(msg) { %>
+          <p><%- msg %></p>
+        <% }); %>
+      </div>
+    <% } %>
+
+    <form action="/inv/add-inventory" method="POST">
+      <label for="classification_id">Classification:</label>
+      <select id="classification_id" name="classification_id" required>
+        <option value="">Choose a classification</option>
+        <%- classificationList %>
+      </select>
+
+      <label for="inv_make">Make:</label>
+      <input type="text" id="inv_make" name="inv_make" required>
+
+      <label for="inv_model">Model:</label>
+      <input type="text" id="inv_model" name="inv_model" required>
+
+      <label for="inv_description">Description:</label>
+      <textarea id="inv_description" name="inv_description" required></textarea>
+
+      <label for="inv_image">Image URL:</label>
+      <input type="text" id="inv_image" name="inv_image" required>
+
+      <!-- Agregar el campo Thumbnail Path -->
+      <label for="inv_thumbnail">Thumbnail Path:</label>
+      <input type="text" id="inv_thumbnail" name="inv_thumbnail" required>
+
+      <label for="inv_price">Price:</label>
+      <input type="number" id="inv_price" name="inv_price" required>
+
+      <label for="inv_year">Year:</label>
+      <input type="number" id="inv_year" name="inv_year" required>
+
+      <label for="inv_miles">Miles:</label>
+      <input type="number" id="inv_miles" name="inv_miles" required>
+
+      <label for="inv_color">Color:</label>
+      <input type="text" id="inv_color" name="inv_color" required>
+
+      <!-- Mover el botón submit -->
+      <button type="submit">Add Inventory</button>
+    </form>
+  </main>
+</body>
+

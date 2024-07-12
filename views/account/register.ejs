@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
     <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
     <h1><%= title %></h1>
     <% if (messages && messages.success) { %>
-        <p style="color: green"><%= messages.success %></p>
+        <p style="color: green"><%- messages.success %></p>
     <% } %>
 
     <!-- Bloque de código para mostrar los errores -->
     <% if (errors) { %>
         <ul class="notice">
             <% errors.forEach(error => { %>
-                <li><%= error.msg %></li>
+                <li><%- error.msg %></li>
             <% }) %>
         </ul>
     <% } %>
@@ -29,10 +28,13 @@
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required placeholder="Enter a valid email address">
         <label for="password">Password:</label>
-        <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
+        <span class="password-requirements">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
         <input type="password" id="password" name="password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-        <input type="checkbox" id="showPassword">
-        <label for="showPassword">Show Password</label>
+        
+        <label for="showPassword" style="display: flex; align-items: center;">
+            <input type="checkbox" id="showPassword">
+            Show Password
+        </label>
         <button type="submit">Register</button>
     </form>
     <p>Already have an account? <a href="/account/login">Login Here</a></p>

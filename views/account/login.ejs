@@ -1,38 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/styles.css">
-    <style>
-        /* Puedes agregar estilos específicos aquí si es necesario */
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-        }
-        span.password-requirements {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-    </style>
-</head>
-<body>
-    <h1><%= title %></h1>
+
+    <h1>Login</h1>
     <% if (messages.error) { %>
         <p style="color: red"><%- messages.error %></p>
-    <% } %>
-    <% if (messages.success) { %>
-        <p style="color: green"><%- messages.notice %></p>
-    <% } %>
-    <form action="/account/login" method="POST">
+      <% } %>
+      
+      <% if (messages.success) { %>
+        <p style="color: green"><%- messages.success %></p>
+      <% } %>
+    <form id="loginForm" action="/account/login" method="post">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required placeholder="Enter a valid email address">
+        <input type="text" name="account_email" id="email" placeholder="Enter your email" value="<%= locals.account_email %>">
         
         <label for="password">Password:</label>
-        <span class="password-requirements">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
-        <input type="password" id="password" name="password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+        <span class="password-requirements">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter, and 1 special character</span>
+        <input type="password" id="password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
         
         <label for="showPassword" style="display: flex; align-items: center;">
             <input type="checkbox" id="showPassword">
@@ -42,6 +23,8 @@
         <button type="submit">Login</button>
     </form>
     <p>Don't have an account? <a href="/account/register">Register Here</a></p>
+
+    <!-- Script para mostrar u ocultar la contraseña -->
     <script>
         document.getElementById('showPassword').addEventListener('change', function () {
             const passwordInput = document.getElementById('password');
@@ -52,5 +35,3 @@
             }
         });
     </script>
-</body>
-</html>

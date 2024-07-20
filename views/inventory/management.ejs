@@ -1,21 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-</head>
-<body>
+
+    <script defer src="/js/inventory.js"></script> <!-- Corrige esta ruta -->
+
     <h1><%= title %></h1>
-    <% if (messages.success) { %>
+    <% if (messages && messages.success) { %>
         <div class="flash-message success"><%= messages.success %></div>
     <% } %>
-    <% if (messages.error) { %>
+    <% if (messages && messages.error) { %>
         <div class="flash-message error"><%= messages.error %></div>
     <% } %>
     <ul>
         <li><a href="/inv/add-classification">Add New Classification</a></li>
         <li><a href="/inv/add-inventory">Add New Inventory Item</a></li>
     </ul>
+
+    <h2>Manage Inventory</h2>
+    <p>Select a classification from the list to see the items belonging to the classification.</p>
+    <div>
+        <select id="classificationList">
+            <% classificationList.forEach(function(classification) { %>
+                <option value="<%= classification.classification_id %>"><%= classification.classification_name %></option>
+            <% }); %>
+        </select>
+    </div>
+    <table id="inventoryDisplay"></table>
+
+    <noscript>JavaScript must be enabled to use this page.</noscript>
 </body>
 </html>

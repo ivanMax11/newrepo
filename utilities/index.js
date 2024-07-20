@@ -1,4 +1,6 @@
 const invModel = require("../models/inventory-model");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const Util = {};
 
@@ -85,18 +87,32 @@ Util.buildVehicleDetailView = function (vehicle) {
 Util.buildClassificationList = async function () {
   try {
     let data = await invModel.getClassifications();
+    return data; // Devolvemos el array directamente
+  } catch (error) {
+    console.error("Error building classification list:", error);
+    throw error;
+  }
+};
+
+/* **************************************
+ * Build the classification list HTML for the add inventory view
+ ************************************** */
+Util.buildClassificationListHTML = async function () {
+  try {
+    let data = await invModel.getClassifications();
     let options = "";
     if (data && data.length > 0) {
       data.forEach((row) => {
         options += `<option value="${row.classification_id}">${row.classification_name}</option>`;
       });
     }
-    return options;
+    return options; // Devolvemos el HTML de las opciones
   } catch (error) {
     console.error("Error building classification list:", error);
     throw error;
   }
 };
+
 
 /* ****************************************
  * Middleware For Handling Errors
@@ -105,5 +121,42 @@ Util.buildClassificationList = async function () {
  **************************************** */
 Util.handleErrors = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
+
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) {
+   jwt.verify(
+    req.cookies.jwt,
+    process.env.ACCESS_TOKEN_SECRET,
+    function (err, accountData) {
+     if (err) {
+      req.flash("notice", "Please log in")
+      res.clearCookie("jwt")
+      return res.redirect("/account/login")
+     }
+     res.locals.accountData = accountData
+     res.locals.loggedin = 1
+     next()
+    })
+  } else {
+   next()
+  }
+ }
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+}
+
+
 
 module.exports = Util;

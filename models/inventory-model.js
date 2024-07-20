@@ -75,10 +75,67 @@ async function addInventory(inv_make, inv_model, classification_id, inv_descript
   }
 }
 
+/* ***************************
+ *  Get all inventory items
+ * ************************** */
+async function getAllInventory() {
+  try {
+    const data = await pool.query('SELECT inv_id, inv_make, inv_model FROM public.inventory');
+    return data.rows;
+  } catch (error) {
+    console.error("Error fetching all inventory items:", error);
+    throw error;
+  }
+}
+
+
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+async function updateInventory(
+  inv_id,
+  inv_make,
+  inv_model,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_year,
+  inv_miles,
+  inv_color,
+  classification_id
+) {
+  try {
+    const sql =
+      "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_description = $3, inv_image = $4, inv_thumbnail = $5, inv_price = $6, inv_year = $7, inv_miles = $8, inv_color = $9, classification_id = $10 WHERE inv_id = $11 RETURNING *";
+    const data = await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id,
+      inv_id
+    ]);
+    return data.rows[0];
+  } catch (error) {
+    console.error("model error: " + error);
+    throw error; // Propaga el error para manejarlo en el controlador
+  }
+}
+
+
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
   getVehicleById,
   addClassification,
-  addInventory
+  addInventory,
+  getAllInventory,
+  updateInventory
+ 
 };

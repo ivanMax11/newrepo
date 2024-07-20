@@ -1,0 +1,12 @@
+
+    <h1><%- title %></h1>
+    <h2>Welcome New</h2>
+    <% if (messages && messages.error) { %>
+        <p style="color: red"><%- messages.error %></p>
+    <% } %> 
+    <% if (messages && messages.success) { %>
+        <p style="color: green"><%- messages.success %></p>
+    <% } %>
+
+    <p>You're logged in</p>
+    <p><a href="/account/edit">Edit Account Information</a></p>

@@ -1,0 +1,52 @@
+
+  <h1><%= title %></h1>
+  <% if (messages && messages.success && messages.success.length > 0) { %>
+    <div class="alert alert-success">
+      <ul>
+        <% messages.success.forEach(function(message) { %>
+          <li><%= message %></li>
+        <% }); %>
+      </ul>
+    </div>
+  <% } %>
+  
+  <% if (messages && messages.error && messages.error.length > 0) { %>
+    <div class="alert alert-danger">
+      <ul>
+        <% messages.error.forEach(function(message) { %>
+          <li><%= message %></li>
+        <% }); %>
+      </ul>
+    </div>
+  <% } %>
+  
+  <form id="updateForm" action="/inv/update" method="post">
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+    <label for="inv_make">Make:</label>
+    <input type="text" id="inv_make" name="inv_make" value="<%= inv_make %>" required placeholder="min 3 character"><br>
+    <label for="inv_model">Model:</label>
+    <input type="text" id="inv_model" name="inv_model" value="<%= inv_model %>" required><br>
+    <label for="inv_year">Year:</label>
+    <input type="text" id="inv_year" name="inv_year" value="<%= inv_year %>" required><br>
+    <label for="inv_description">Description:</label>
+    <textarea id="inv_description" name="inv_description" required placeholder="Write a description"><%= inv_description %></textarea><br>
+    <label for="inv_image">Image URL:</label>
+    <input type="text" id="inv_image" name="inv_image" value="<%= inv_image %>" required><br>
+    <label for="inv_thumbnail">Thumbnail URL:</label>
+    <input type="text" id="inv_thumbnail" name="inv_thumbnail" value="<%= inv_thumbnail %>" required><br>
+    <label for="inv_price">Price:</label>
+    <input type="text" id="inv_price" name="inv_price" value="<%= inv_price %>" required placeholder="Decimal or integer"><br>
+    <label for="inv_miles">Miles:</label>
+    <input type="text" id="inv_miles" name="inv_miles" value="<%= inv_miles %>" required><br>
+    <label for="inv_color">Color:</label>
+    <input type="text" id="inv_color" name="inv_color" value="<%= inv_color %>" required><br>
+    <input type="hidden" name="classification_id" value="<%= classification_id %>">
+    <button type="submit" disabled>Update Vehicle</button>
+
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
+
+  </form>
+
+  <script src="/js/inv-update.js"></script>

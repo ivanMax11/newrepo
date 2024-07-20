@@ -1,4 +1,4 @@
-const invModel = require("../models/inventory-model");
+/* const invModel = require("../models/inventory-model");
 const utilities = require("../utilities/");
 const { validationResult } = require("express-validator");
 
@@ -7,7 +7,7 @@ const inventoryController = {};
 /* ***************************
  *  Render the management view
  * ************************** */
-inventoryController.renderManagement = async function (req, res, next) {
+/*inventoryController.renderManagement = async function (req, res, next) {
   try {
     let nav = await utilities.getNav();
     res.render("./inventory/management", {
@@ -23,7 +23,7 @@ inventoryController.renderManagement = async function (req, res, next) {
 /* ***************************
  *  Render the form for adding a new classification
  * ************************** */
-inventoryController.renderAddClassification = async function (req, res, next) {
+/*inventoryController.renderAddClassification = async function (req, res, next) {
   let nav = await utilities.getNav();
   res.render("inventory/add-classification", {
     title: "Add New Classification",
@@ -31,12 +31,12 @@ inventoryController.renderAddClassification = async function (req, res, next) {
     errors: null,
     message: null
   });
-};
+}*/
 
 /* ***************************
  *  Process the form for adding a new classification
  * ************************** */
-inventoryController.processAddClassification = async function (req, res, next) {
+/*inventoryController.processAddClassification = async function (req, res, next) {
   const errors = validationResult(req);
   let nav = await utilities.getNav();
 
@@ -68,4 +68,6 @@ inventoryController.processAddClassification = async function (req, res, next) {
   }
 };
 
-module.exports = inventoryController;
+
+
+module.exports = inventoryController;*/

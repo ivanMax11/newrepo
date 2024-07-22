@@ -9,15 +9,16 @@ const Util = {};
  ************************** */
 Util.getNav = async function () {
   try {
-    // Obtener las clasificaciones desde el modelo
+    // To get the classification from  model
     let data = await invModel.getClassifications();
     
-    // Inicializar la lista de navegación
+    // Inicialize the navigation list
     let list = "<ul>";
     list += '<li><a href="/" title="Home page">Home</a></li>';
 
-    // Verificar si hay datos válidos para construir la lista de navegación
-    if (data && data.length > 0) {  // Modificado: data ahora es un array directamente
+   
+    // Verify if there are date valide to construct the navigation list
+    if (data && data.length > 0) {  
       data.forEach((row) => {
         list += "<li>";
         list +=
@@ -26,14 +27,14 @@ Util.getNav = async function () {
         list += "</li>";
       });
     } else {
-      // Manejar el caso donde no hay clasificaciones encontradas
+      // Handle in case aren´t classifications don´t findit
       list += '<li><a href="#" title="No classifications found">No Classifications Found</a></li>';
     }
 
     list += "</ul>";
     return list;
   } catch (error) {
-    // Manejar errores al obtener las clasificaciones
+    // Handle errors to get the classifications
     console.error("Error in getNav:", error);
     return '<ul><li><a href="#" title="Error loading classifications">Error Loading Classifications</a></li></ul>';
   }
@@ -87,7 +88,7 @@ Util.buildVehicleDetailView = function (vehicle) {
 Util.buildClassificationList = async function () {
   try {
     let data = await invModel.getClassifications();
-    return data; // Devolvemos el array directamente
+    return data; 
   } catch (error) {
     console.error("Error building classification list:", error);
     throw error;
@@ -106,7 +107,7 @@ Util.buildClassificationListHTML = async function () {
         options += `<option value="${row.classification_id}">${row.classification_name}</option>`;
       });
     }
-    return options; // Devolvemos el HTML de las opciones
+    return options; 
   } catch (error) {
     console.error("Error building classification list:", error);
     throw error;
@@ -149,13 +150,22 @@ Util.checkJWTToken = (req, res, next) => {
  *  Check Login
  * ************************************ */
 Util.checkLogin = (req, res, next) => {
-  if (res.locals.loggedin) {
-    next()
-  } else {
-    req.flash("notice", "Please log in.")
-    return res.redirect("/account/login")
+  const token = req.cookies.jwt;
+  if (!token) {
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
   }
-}
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+    if (err) {
+      req.flash("notice", "Please log in.");
+      return res.redirect("/account/login");
+    }
+    res.locals.accountData = decoded;
+    res.locals.loggedin = true;
+    next();
+  });
+};
 
 
 

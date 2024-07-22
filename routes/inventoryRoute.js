@@ -13,6 +13,8 @@ router.get("/detail/:inventoryId", invController.buildByInventoryId);
 // Route to render the management view
 router.get("/management", invController.renderManagement);
 
+
+
 // Route to render the add-classification view
 router.get("/add-classification", invController.renderAddClassification);
 router.post("/add-classification", invController.processAddClassification);
@@ -35,7 +37,6 @@ router.post(
 
 // Route to render the edit management
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
-
 
 // Route to render edit inventory view
 router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));

@@ -1,12 +1,20 @@
+<link rel="stylesheet" href="/public/css/styles.css">
+<h2>Welcome <%- accountFirstName %></h2>
 
-    <h1><%- title %></h1>
-    <h2>Welcome New</h2>
-    <% if (messages && messages.error) { %>
-        <p style="color: red"><%- messages.error %></p>
-    <% } %> 
-    <% if (messages && messages.success) { %>
-        <p style="color: green"><%- messages.success %></p>
-    <% } %>
+<h1><%= title %></h1>
 
-    <p>You're logged in</p>
-    <p><a href="/account/edit">Edit Account Information</a></p>
+<% if (messages && messages.error) { %>
+    <p style="color: red"><%- messages.error %></p>
+<% } %> 
+<% if (messages && messages.success) { %>
+    <p style="color: green"><%- messages.success %></p>
+<% } %>
+
+<h3 >You're logged in</h3>
+<p class="left-align2"><a href="/account/edit/<%- accountId %>">Edit Account Information</a></p>
+
+<% if (accountType === 'Employee' || accountType === 'Admin') { %>
+  <h3 class="left-align1">Inventory Management</h3>
+  <p class="left-align"><a href="/inv/manage">Go to Inventory Management</a></p>
+<% } %>
+

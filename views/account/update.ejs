@@ -1,0 +1,34 @@
+<h1><%- title %></h1>
+
+<% if (messages && messages.error) { %>
+    <p style="color: red"><%- messages.error %></p>
+<% } %> 
+<% if (messages && messages.success) { %>
+    <p style="color: green"><%- messages.success %></p>
+<% } %>
+
+<h2>Account Update</h2>
+<form action="/account/update/<%- accountId %>" method="post">
+  <label for="account_firstname">First Name:</label>
+  <input type="text" id="account_firstname" name="account_firstname" value="<%- accountFirstName %>" required><br>
+
+  <label for="account_lastname">Last Name:</label>
+  <input type="text" id="account_lastname" name="account_lastname" value="<%- accountLastName %>" required><br>
+
+  <label for="account_email">Email:</label>
+  <input type="email" id="account_email" name="account_email" value="<%- accountEmail %>" required><br>
+
+  <input type="hidden" name="account_id" value="<%- accountId %>">
+
+  <button type="submit">Update Account</button>
+</form>
+
+<h2>Change Password</h2>
+<form action="/account/update-password/<%- accountId %>" method="post">
+  <label for="account_password">New Password:</label>
+  <input type="password" id="account_password" name="account_password" required><br>
+
+  <input type="hidden" name="account_id" value="<%- accountId %>">
+
+  <button type="submit">Change Password</button>
+</form>

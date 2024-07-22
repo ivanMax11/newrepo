@@ -1,4 +1,4 @@
-// Requiere declaraciones
+// Requiere statements
 const baseController = require("./controllers/baseController");
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
@@ -30,18 +30,24 @@ app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
     pool,
+    createTableIfMissing: true
   }),
   secret: process.env.SESSION_SECRET,
   resave: false, 
   saveUninitialized: false, 
   cookie: { secure: false } 
 }));
+
 app.use(flash());
 
-app.use(function(req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
+
+// Middleware to establish the locals data
+app.use((req, res, next) => {
+  res.locals.loggedin = req.session.loggedin || false;
+  res.locals.messages = req.flash();
   next();
 });
+
 
 // JWT Token Middleware
 app.use(utilities.checkJWTToken);

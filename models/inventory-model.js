@@ -124,7 +124,7 @@ async function updateInventory(
     return data.rows[0];
   } catch (error) {
     console.error("model error: " + error);
-    throw error; // Propaga el error para manejarlo en el controlador
+    throw error; 
   }
 }
 

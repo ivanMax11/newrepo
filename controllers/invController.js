@@ -102,11 +102,12 @@ invController.processAddClassification = async function (req, res, next) {
 invController.renderManagement = async function (req, res, next) {
   try {
     let nav = await utilities.getNav();
-    const classificationList = await utilities.buildClassificationList(); // Asegurémonos de que devuelve un array
+    const classificationList = await utilities.buildClassificationList(); 
     res.render("./inventory/management", {
       title: "Inventory Management",
       nav,
-      classificationList, // Pasamos el array aquí
+      classificationList, 
+      messages: req.flash() 
     });
   } catch (error) {
     console.error("Error rendering management view:", error);

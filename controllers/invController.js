@@ -218,6 +218,28 @@ invController.editInventoryView = async function (req, res, next) {
   }
 };
 
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+invController.deleteInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id, 10);
+  try {
+    const result = await invModel.deleteInventory(inv_id);
+    if (result.rowCount > 0) {
+      req.flash('success', 'Inventory item deleted successfully');
+    } else {
+      req.flash('error', 'Failed to delete inventory item');
+    }
+    res.redirect('/inv/management');
+  } catch (error) {
+    console.error("Error deleting inventory item:", error);
+    req.flash('error', 'Failed to delete inventory item');
+    res.redirect('/inv/management');
+  }
+};
+
+
+
 
 /* ***************************
  *  Update Inventory Data

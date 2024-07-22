@@ -14,6 +14,9 @@ router.get("/detail/:inventoryId", invController.buildByInventoryId);
 router.get("/management", invController.renderManagement);
 
 
+// Route to handle inventory item deletion
+router.get("/delete/:inv_id", invController.deleteInventory);
+
 
 // Route to render the add-classification view
 router.get("/add-classification", invController.renderAddClassification);

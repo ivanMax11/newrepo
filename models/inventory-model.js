@@ -89,6 +89,14 @@ async function getAllInventory() {
 }
 
 
+async function deleteInventory(inv_id) {
+  const query = 'DELETE FROM inventory WHERE inv_id = $1';
+  const result = await pool.query(query, [inv_id]);
+  return result;
+}
+
+
+
 /* ***************************
  *  Update Inventory Data
  * ************************** */
@@ -136,6 +144,8 @@ module.exports = {
   addClassification,
   addInventory,
   getAllInventory,
-  updateInventory
+  updateInventory,
+  deleteInventory
+ 
  
 };

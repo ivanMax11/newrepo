@@ -120,7 +120,7 @@ async function accountLogin(req, res, next) {
 
 
 /* ****************************************
- *  Build account to render account view
+ *  Build account to render account manageent view
  * ************************************ */
 async function buildAccountManagement(req, res) {
   try {

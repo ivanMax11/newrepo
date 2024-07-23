@@ -42,3 +42,28 @@ function buildInventoryList(data) {
     // Display the contents in the Inventory Management view 
     inventoryDisplay.innerHTML = dataTable; 
    }
+
+
+   document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('inventoryDisplay').addEventListener('click', async function(event) {
+        if (event.target.classList.contains('mark-as-sold')) {
+            const invId = event.target.dataset.invId;
+            try {
+                const response = await fetch(`/inv/mark-as-sold/${invId}`, { method: 'POST' });
+                const result = await response.json();
+                if (result.success) {
+                    const row = event.target.closest('tr');
+                    row.classList.add('sold');
+                    event.target.remove(); // Eliminar el botón después de marcarlo como vendido
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error("Error marking inventory item as sold:", error);
+                alert("Failed to mark inventory item as sold.");
+            }
+        }
+    });
+});
+
+  

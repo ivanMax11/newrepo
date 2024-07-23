@@ -1,6 +1,7 @@
 
-    <script defer src="/js/inventory.js"></script> <!-- Corrige esta ruta -->
-
+    <link rel="stylesheet" href="/css/styles.css">
+    <script defer src="/js/inventory.js"></script> 
+ 
     <h1><%- title %></h1>
     <% if (messages && messages.success) { %>
         <div class="flash-message success"><%= messages.success %></div>
@@ -22,8 +23,32 @@
             <% }); %>
         </select>
     </div>
-    <table id="inventoryDisplay"></table>
-
+    <table id="inventoryDisplay">
+        <thead>
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% inventoryItems.forEach(function(item) { %>
+                <tr class="<%= item.inv_sold ? 'sold' : '' %>">
+                    <td><%= item.inv_make %></td>
+                    <td><%= item.inv_model %></td>
+                    <td><%= item.inv_year %></td>
+                    <td>
+                        <a href="/inv/edit/<%- item.inv_id %>">Edit</a>
+                        <% if (!item.inv_sold) { %>
+                            <button class="mark-as-sold" data-inv-id="<%= item.inv_id %>">Mark as Sold</button>
+                        <% } else { %>
+                            Sold
+                        <% } %>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    
     <noscript>JavaScript must be enabled to use this page.</noscript>
-</body>
-</html>

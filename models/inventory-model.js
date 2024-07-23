@@ -89,6 +89,37 @@ async function getAllInventory() {
 }
 
 
+/* ***************************
+ *  Mark Inventory Item as Sold
+ * ************************** */
+async function markAsSold(inv_id) {
+  try {
+    const sql = "UPDATE public.inventory SET inv_sold = true WHERE inv_id = $1 RETURNING *";
+    const result = await pool.query(sql, [inv_id]);
+    return result.rows[0];
+  } catch (error) {
+    console.error("Error marking item as sold:", error);
+    throw error;
+  }
+}
+
+
+/* ***************************
+ *  Get Sold Inventory Items
+ * ************************** */
+async function getSoldItems() {
+  try {
+    const query = 'SELECT * FROM public.inventory WHERE inv_sold = TRUE ORDER BY inv_id ASC';
+    const result = await pool.query(query);
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching sold items:", error);
+    throw error;
+  }
+}
+
+
+
 async function deleteInventory(inv_id) {
   const query = 'DELETE FROM inventory WHERE inv_id = $1';
   const result = await pool.query(query, [inv_id]);
@@ -137,6 +168,8 @@ async function updateInventory(
 }
 
 
+
+
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
@@ -145,7 +178,9 @@ module.exports = {
   addInventory,
   getAllInventory,
   updateInventory,
-  deleteInventory
+  deleteInventory,
+  markAsSold,
+  getSoldItems
  
  
 };

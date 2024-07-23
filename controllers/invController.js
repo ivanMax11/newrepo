@@ -102,18 +102,22 @@ invController.processAddClassification = async function (req, res, next) {
 invController.renderManagement = async function (req, res, next) {
   try {
     let nav = await utilities.getNav();
-    const classificationList = await utilities.buildClassificationList(); 
+    const classificationList = await utilities.buildClassificationList();
+    const inventoryItems = await invModel.getAllInventory(); 
     res.render("./inventory/management", {
       title: "Inventory Management",
       nav,
-      classificationList, 
-      messages: req.flash() 
+      classificationList,
+      inventoryItems, 
+      errors: null,
+      messages: req.flash()
     });
   } catch (error) {
     console.error("Error rendering management view:", error);
-    res.status(500).send('Server Error');
+    next(error);
   }
 };
+
 
 /* ***************************
  *  Render add-inventory view
@@ -217,6 +221,55 @@ invController.editInventoryView = async function (req, res, next) {
     next(error);
   }
 };
+
+
+/* ***************************
+ *  Mark item as sold
+ * ************************** */
+invController.markAsSold = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id, 10);
+  console.log("Received inv_id:", inv_id);
+  if (isNaN(inv_id)) {
+    console.error("Invalid inv_id:", req.params.inv_id);
+    return res.status(400).json({ success: false, message: 'Invalid inventory ID' });
+  }
+  try {
+    const result = await invModel.markAsSold(inv_id);
+    if (result) {
+      return res.json({ success: true, message: 'Inventory item marked as sold successfully' });
+    } else {
+      return res.status(500).json({ success: false, message: 'Failed to mark inventory item as sold' });
+    }
+  } catch (error) {
+    console.error("Error marking inventory item as sold:", error);
+    return res.status(500).json({ success: false, message: 'Failed to mark inventory item as sold' });
+  }
+};
+
+
+
+/* ***************************
+ *  View all sold items
+ * ************************** */
+invController.viewSoldItems = async function (req, res, next) {
+  try {
+    const soldItems = await invModel.getSoldItems();
+    let nav = await utilities.getNav();
+    res.render("inventory/sold-items", {
+      title: "Sold Items",
+      nav,
+      soldItems,
+      errors: null,
+      message: null
+    });
+  } catch (error) {
+    console.error("Error fetching sold items:", error);
+    req.flash("error", "Server Error. Please try again.");
+    res.status(500).redirect("/inv/management");
+  }
+};
+
+
 
 /* ***************************
  *  Delete Inventory Item

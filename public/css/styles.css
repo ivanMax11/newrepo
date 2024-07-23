@@ -534,6 +534,12 @@ button:hover {
   margin-left: 0; 
 }
 
+
+.sold {
+  background-color: #f8d7da;
+  text-decoration: line-through;
+}
+
 /* Styles to medium screen (705px a 940px) */
 @media screen and (min-width: 708px) and (max-width: 1000px) {
   .description {

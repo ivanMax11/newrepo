@@ -1,0 +1,30 @@
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <h1><%= title %></h1>
+    <% if (soldItems.length === 0) { %>
+      <p>No sold items found.</p>
+    <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% soldItems.forEach(item => { %>
+                <tr>
+                  <td><%= item.inv_make %> <%= item.inv_model %></td>
+                  <td><a href='/inv/edit/<%= item.inv_id %>' title='Click to update'>Modify</a></td>
+                  <td><form action='/inv/sell/<%= item.inv_id %>' method='POST'><button type='submit'>Mark as Sold</button></form></td>
+                  <td><a href='/inv/delete/<%= item.inv_id %>' title='Click to delete'>Delete</a></td>
+                </tr>
+              <% }) %>
+              
+        </tbody>
+      </table>
+    <% } %>
+

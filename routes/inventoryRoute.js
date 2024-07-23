@@ -46,6 +46,10 @@ router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryVi
 
 router.post("/update/", utilities.handleErrors(invController.updateInventory));
 
+/* Route to mark inventory item as sold */
+router.post("/mark-as-sold/:inv_id", invController.markAsSold);
 
+/* Route to view sold items */
+router.get("/sold-items", invController.viewSoldItems);
 
 module.exports = router;

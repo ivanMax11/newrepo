@@ -83,40 +83,70 @@ async function accountLogin(req, res, next) {
   const { account_email, account_password } = req.body;
   const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
-    req.flash("error", "Invalid email or password. Please try again.");
-    return res.redirect("/account/login");
-  }
+  let nav = await utilities.getNav();
 
-  const accountData = await accountModel.getAccountByEmail(account_email);
-  if (!accountData || !(await bcrypt.compare(account_password, accountData.account_password))) {
-    req.flash("error", "Invalid email or password. Please try again.");
-    return res.redirect("/account/login");
+  // Si hay errores en la validación de input (express-validator)
+  if (!errors.isEmpty()) {
+    return res.render("account/login", {
+      title: "Login",
+      nav,
+      errors: errors.array(),
+      messages: req.flash("error", "Please check your email and password."),
+    });
   }
 
   try {
-    delete accountData.account_password;
+    // Buscar la cuenta por email
+    const accountData = await accountModel.getAccountByEmail(account_email);
+
+    // Si no se encuentra el usuario
+    if (!accountData) {
+      req.flash("error", "Invalid email or password.");
+      return res.render("account/login", {
+        title: "Login",
+        nav,
+        errors: [{ msg: "Invalid email or password." }],
+        messages: req.flash(),
+      });
+    }
+
+    // Comparar la contraseña ingresada con la almacenada
+    const passwordMatch = await bcrypt.compare(account_password, accountData.account_password);
+    
+    if (!passwordMatch) {
+      req.flash("error", "Invalid email or password.");
+      return res.render("account/login", {
+        title: "Login",
+        nav,
+        errors: [{ msg: "Invalid email or password." }],
+        messages: req.flash(),
+      });
+    }
+
+    // Si las credenciales son correctas
+    delete accountData.account_password;  // Eliminamos la contraseña antes de generar el token
     const accessToken = jwt.sign(
       accountData,
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: 3600 }
+      { expiresIn: 3600 }  // Token válido por 1 hora
     );
+
+    // Guardar el token en las cookies
     res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
     req.flash("success", "Login successful!");
 
-    // Bugging
-    console.log("Logged in user data:", accountData);
-
-    // Establish res.locals
+    // Marcar el inicio de sesión
     res.locals.loggedin = true;
     res.locals.accountData = accountData;
 
     return res.redirect("/account/");
   } catch (error) {
     console.error("Error during login:", error);
-    next(new Error("Access Forbidden"));
+    req.flash("error", "There was an issue logging in. Please try again.");
+    return res.redirect("/account/login");
   }
 }
+
 
 
 /* ****************************************

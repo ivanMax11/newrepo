@@ -650,7 +650,7 @@ button:hover {
 
   @media only screen and (max-width: 768px) {
     .floating-box {
-        top: 45%;
+        top: 50%;
         left: 35%;
         transform: translate(-50%, -50%);
         max-width: 250px; /* Tamaño más pequeño en pantallas móviles */

@@ -103,54 +103,15 @@ body {
   font-weight: 700;
 }
 
-.delorean-main {
+.mustang-main {
   text-align: center;
 }
 
-.delorean-img {
+.mustang-img {
   width: 630px;
   display: block;
   margin: 0 auto;
 }
-
-.floating-box {
-  position: absolute;
-  top: 45%;
-  left: 33%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 15px 20px;
-  max-width: 280px; /* Tamaño máximo más reducido */
-  text-align: center;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera para más definición */
-}
-
-.delorean-description h2 {
-  font-size: 20px;
-  margin-bottom: 15px;
-}
-
-.delorean-description ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  text-align: left;
-}
-
-.delorean-description li {
-  font-weight: bold;
-  font-size: 16px;
-  color: var(--color-tertiary);
-  margin-bottom: 8px;
-}
-
-.delorean-description p {
-  margin-top: 10px;
-  font-size: 14px;
-  color: var(--color-secondary);
-}
-
 
 section {
   display: flex;
@@ -638,33 +599,13 @@ button:hover {
       font-size: 16px;
     }
   
-    .delorean-main {
+    .mustang-main {
       text-align: center;
       padding: 10px;
     }
   
-    .delorean-img {
+    .mustang-img {
       max-width: 100%;
-    }
-
-    .floating-box {
-        top: 45%;
-        left: 35%;
-        transform: translate(-50%, -50%);
-        max-width: 230px; /* Tamaño más pequeño en pantallas móviles */
-        padding: 10px 15px;
-    }
-
-    .delorean-description h2 {
-        font-size: 18px;
-    }
-
-    .delorean-description li {
-        font-size: 14px;
-    }
-
-    .delorean-description p {
-        font-size: 12px;
     }
 
     section {
